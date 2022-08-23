@@ -1,0 +1,11 @@
+{
+  "name": "kata-solution",
+  "version": "1.0.0",
+  "description": "Solution to kata converter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Narhzih",
+  "license": "ISC"
+}
