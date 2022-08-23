@@ -1,10 +1,14 @@
 {
-  "name": "kata-to-french",
+  "name": "kata-to-french-converter",
   "version": "1.0.1",
   "description": "Solution to kata to french converter",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/narhzih/kata-solution"
+  },
   "scripts": {
     "prepublish": "npm run build",
     "build": "tsc",

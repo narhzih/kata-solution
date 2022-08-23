@@ -7,7 +7,7 @@ This package lets you convert array of numbers to the equivalent array of french
 Install the package with the following comand:
 
 ```bash
-$ npm i --save-dev kata-to-french
+$ npm i --save-dev kata-to-french-converter
 ```
 
 In your script:
