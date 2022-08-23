@@ -50,11 +50,14 @@ class Converter {
         }
       }
     } else if (digit > 69 && digit <= 79) {
-      return "Working on numbers 69-79";
+      const determinant = Number(digit) - 60;
+      return `${this.tensPrefix[numberBase]}-${this.units[determinant]}`;
     } else if (digit > 79 && digit <= 89) {
-      return "Working on numbers 79-89";
+      const determinant = Number(digit) - 60;
+      return `quatre-${this.convertTens(determinant)}`;
     } else if (digit > 89 && digit <= 99) {
-      return "Converting a 90";
+      const determinant = Number(digit) - 80;
+      return `quatre-vingt-${this.units[determinant]}`;
     }
     return this.tensPrefix[numberBase] ?? "Not Found";
   }
