@@ -2,9 +2,12 @@
   "name": "kata-solution-olawale",
   "version": "1.0.0",
   "description": "Solution to kata to french converter",
-  "main": "index.js",
+  "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "type": "commonjs",
   "scripts": {
+    "prepublish": "npm run build",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Narhzih",

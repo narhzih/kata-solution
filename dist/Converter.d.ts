@@ -1,10 +1,12 @@
-export default class Converter {
+declare class Converter {
     private units;
     private tensPrefix;
     private getNumberPlaceValue;
     private getArraySum;
-    convertDigit(digit: any): any;
+    convertDigits(digits: any): any[];
+    private convertDigit;
     private convertUnit;
     private convertTens;
     private convertHundredAndMore;
 }
+export default Converter;

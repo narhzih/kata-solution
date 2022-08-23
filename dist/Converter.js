@@ -52,6 +52,15 @@ class Converter {
         });
         return total;
     }
+    convertDigits(digits) {
+        let results = [];
+        if (digits && digits.length) {
+            digits.forEach((digit) => {
+                results.push(this.convertDigit(digit));
+            });
+        }
+        return results;
+    }
     convertDigit(digit) {
         if (digit > 0 && digit <= 16) {
             return this.convertUnit(digit);
@@ -59,8 +68,11 @@ class Converter {
         else if (digit > 16 && digit <= 99) {
             return this.convertTens(digit);
         }
-        else {
+        else if (digit < 1000000) {
             return this.convertHundredAndMore(digit);
+        }
+        else {
+            return "Cannot convert digit:";
         }
     }
     convertUnit(digit) {
@@ -117,13 +129,12 @@ class Converter {
             return `${convThousand}${convRest}`;
         }
         else if (digit < 100000) {
-            console.log("Place values");
+            // Get the highest value and the sum of the rest
             const hThousand = placeValues[0];
             const restSum = this.getArraySum(placeValues.slice(1));
-            console.log("REst sum ->", restSum);
-            const htDet = hThousand / 1000;
+            const htDet = hThousand / 1000; // Determinant of word
             const convHt = this.convertDigit(htDet);
-            const convRest = restSum > 0 ? `-${this.convertDigit(restSum)}` : "";
+            const convRest = restSum > 0 ? `-${this.convertDigit(restSum)}` : ""; // Convert sum of the rest
             return `${convHt}${convRest}`;
         }
         else if (digit < 1000000) {

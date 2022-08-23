@@ -1,4 +1,4 @@
-export default class Converter {
+class Converter {
   private units = {
     0: "zéro",
     1: "un",
@@ -59,6 +59,7 @@ export default class Converter {
         results.push(this.convertDigit(digit));
       });
     }
+    return results;
   }
   private convertDigit(digit) {
     if (digit > 0 && digit <= 16) {
@@ -147,3 +148,5 @@ export default class Converter {
     }
   }
 }
+
+export default Converter;
