@@ -13,7 +13,7 @@ $ npm i --save-dev kata-to-french-converter
 In your script:
 
 ```
-import { Converter } from 'kata-to-french';
+import { Converter } from 'kata-to-french-converter';
 
 const converter = new Converter();
 console.log(converter.convertDigits([1,4,5,6]))
