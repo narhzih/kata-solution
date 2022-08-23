@@ -1,47 +1,39 @@
 class Converter {
-  constructor() {
-    this.units = {
-      1: "un",
-      2: "deux",
-      3: "trois",
-      4: "quatre",
-      5: "cinq",
-      6: "six",
-      7: "sept",
-      8: "huit",
-      9: "neuf",
-      10: "dix",
-      11: "onze",
-      12: "douze",
-      13: "treize",
-      14: "quatorze",
-      15: "quinze",
-      16: "seize",
-      17: "dix-sept",
-      18: "dix-huit",
-      19: "dix-neuf",
-    };
+  private units = {
+    0: "zéro",
+    1: "un",
+    2: "deux",
+    3: "trois",
+    4: "quatre",
+    5: "cinq",
+    6: "six",
+    7: "sept",
+    8: "huit",
+    9: "neuf",
+    10: "dix",
+    11: "onze",
+    12: "douze",
+    13: "treize",
+    14: "quatorze",
+    15: "quinze",
+    16: "seize",
+    17: "dix-sept",
+    18: "dix-huit",
+    19: "dix-neuf",
+  };
 
-    this.tensPrefix = {
-      10: "dix",
-      20: "vingt",
-      30: "trente",
-      40: "quarante",
-      50: "cinquante",
-      60: "soixante",
-      70: "septante",
-      80: "huiante",
-      90: "nonante",
-    };
-
-    this.hAndTPrefix = {
-      100: "cent",
-      1000: "mille",
-      10000: "",
-      100000: "",
-    };
-  }
-  getNumberPlaceValue(num, res = [], factor = 1) {
+  private tensPrefix = {
+    10: "dix",
+    20: "vingt",
+    30: "trente",
+    40: "quarante",
+    50: "cinquante",
+    60: "soixante",
+    70: "septante",
+    80: "huiante",
+    90: "nonante",
+  };
+  private getNumberPlaceValue(num, res = [], factor = 1) {
     if (num) {
       const val = (num % 10) * factor;
       res.unshift(val);
@@ -50,7 +42,7 @@ class Converter {
     return res;
   }
 
-  getArraySum(arr) {
+  private getArraySum(arr) {
     console.log("Calculating sum for ->", arr);
     let total = 0;
     arr.forEach((num) => {
@@ -59,21 +51,33 @@ class Converter {
 
     return total;
   }
-  convertDigit(digit) {
+
+  public convertDigits(digits) {
+    let results = [];
+    if (digits && digits.length) {
+      digits.forEach((digit) => {
+        results.push(this.convertDigit(digit));
+      });
+    }
+    return results;
+  }
+  private convertDigit(digit) {
     if (digit > 0 && digit <= 16) {
       return this.convertUnit(digit);
     } else if (digit > 16 && digit <= 99) {
       return this.convertTens(digit);
-    } else {
+    } else if (digit < 1000000) {
       return this.convertHundredAndMore(digit);
+    } else {
+      return "Cannot convert digit:";
     }
   }
 
-  convertUnit(digit) {
+  private convertUnit(digit) {
     return this.units[digit];
   }
 
-  convertTens(digit) {
+  private convertTens(digit) {
     const firstNumberOfDigit = digit.toString().split("")[0];
     const numberBase = Number(firstNumberOfDigit + "0");
 
@@ -99,7 +103,7 @@ class Converter {
     return this.tensPrefix[numberBase] ?? "Not Found";
   }
 
-  convertHundredAndMore(digit) {
+  private convertHundredAndMore(digit) {
     let placeValues = this.getNumberPlaceValue(digit);
 
     if (digit < 1000) {
@@ -123,15 +127,13 @@ class Converter {
       const convRest = restSum > 0 ? `-${this.convertDigit(restSum)}` : "";
       return `${convThousand}${convRest}`;
     } else if (digit < 100000) {
-      console.log("Place values");
-
+      // Get the highest value and the sum of the rest
       const hThousand = placeValues[0];
       const restSum = this.getArraySum(placeValues.slice(1));
-      console.log("REst sum ->", restSum);
 
-      const htDet = hThousand / 1000;
+      const htDet = hThousand / 1000; // Determinant of word
       const convHt = this.convertDigit(htDet);
-      const convRest = restSum > 0 ? `-${this.convertDigit(restSum)}` : "";
+      const convRest = restSum > 0 ? `-${this.convertDigit(restSum)}` : ""; // Convert sum of the rest
 
       return `${convHt}${convRest}`;
     } else if (digit < 1000000) {
@@ -147,4 +149,4 @@ class Converter {
   }
 }
 
-module.exports = Converter;
+export default Converter;

@@ -1,11 +1,19 @@
 {
-  "name": "kata-solution",
-  "version": "1.0.0",
-  "description": "Solution to kata converter",
-  "main": "index.js",
+  "name": "kata-solution-olawale",
+  "version": "1.0.1",
+  "description": "Solution to kata to french converter",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "commonjs",
   "scripts": {
+    "prepublish": "npm run build",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Narhzih",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.7.11",
+    "jest": "^28.1.3"
+  }
 }
