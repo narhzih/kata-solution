@@ -31,6 +31,10 @@ class Converter {
       90: "nonante",
     };
   }
+
+  convertUnit(digit) {
+    return this.units[digit];
+  }
 }
 
 module.exports = Converter;
