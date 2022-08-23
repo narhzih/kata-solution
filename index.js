@@ -7,8 +7,10 @@ function convertFromKataToFrench(digits) {
     digits.forEach((digit) => {
       if (digit > 0 && digit <= 16) {
         results.push(converter.convertUnit(digit));
+      } else if (digit > 16 && digit <= 99) {
+        results.push(converter.convertTens(digit));
       } else {
-        results.push("Currently working on others");
+        results.push(converter.convertHundredAndMore(digit));
       }
     });
   }
@@ -17,4 +19,4 @@ function convertFromKataToFrench(digits) {
 }
 
 // Testing it
-console.log(convertFromKataToFrench([13]));
+console.log(convertFromKataToFrench([13, 90, 55, 1001]));

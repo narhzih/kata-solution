@@ -35,6 +35,33 @@ class Converter {
   convertUnit(digit) {
     return this.units[digit];
   }
+
+  convertTens(digit) {
+    const firstNumberOfDigit = digit.toString().split("")[0];
+    const numberBase = Number(firstNumberOfDigit + "0");
+
+    if (digit <= 69) {
+      const determinant = Number(digit) - Number(firstNumberOfDigit + "0");
+      if (determinant > 0) {
+        if (determinant == 1) {
+          return `${this.tensPrefix[numberBase]}-et-un`;
+        } else {
+          return `${this.tensPrefix[numberBase]}-${this.units[determinant]}`;
+        }
+      }
+    } else if (digit > 69 && digit <= 79) {
+      return "Working on numbers 69-79";
+    } else if (digit > 79 && digit <= 89) {
+      return "Working on numbers 79-89";
+    } else if (digit > 89 && digit <= 99) {
+      return "Converting a 90";
+    }
+    return this.tensPrefix[numberBase] ?? "Not Found";
+  }
+
+  convertHundredAndMore(digit) {
+    return "Converting hundered and more";
+  }
 }
 
 module.exports = Converter;
