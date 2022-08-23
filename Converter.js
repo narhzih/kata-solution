@@ -17,6 +17,9 @@ class Converter {
       14: "quatorze",
       15: "quinze",
       16: "seize",
+      17: "dix-sept",
+      18: "dix-huit",
+      19: "dix-neuf",
     };
 
     this.tensPrefix = {
@@ -30,6 +33,22 @@ class Converter {
       80: "huiante",
       90: "nonante",
     };
+
+    this.hAndTPrefix = {
+      100: "cent",
+      1000: "mille",
+      10000: "",
+      100000: "",
+    };
+  }
+  convertDigit(digit) {
+    if (digit > 0 && digit <= 16) {
+      return this.convertUnit(digit);
+    } else if (digit > 16 && digit <= 99) {
+      return this.convertTens(digit);
+    } else {
+      return this.convertHundredAndMore(digit);
+    }
   }
 
   convertUnit(digit) {
@@ -72,7 +91,33 @@ class Converter {
   }
 
   convertHundredAndMore(digit) {
-    return "Converting hundered and more";
+    let placeValues = this.getNumberPlaceValue(digit);
+
+    if (digit < 1000) {
+      // Number in hundereds | only 3 palce values
+      const hundered = placeValues[0];
+      const tens = placeValues[1];
+      const unit = placeValues[2];
+
+      const hDet = hundered / 100;
+      const convHundered = hDet > 1 ? `${this.units[hDet]}-cent` : "cent";
+      const convTens =
+        tens + unit > 0 ? `-${this.convertDigit(tens + unit)}` : "";
+      return `${convHundered}${convTens}`;
+    } else if (digit < 10000) {
+      // Number in 10 thousands | only 4 place holders
+      console.log(placeValues);
+      const thousand = placeValues[0];
+      const restSum = placeValues[1] + placeValues[2] + placeValues[3];
+
+      const tDet = thousand / 1000;
+      const convThousand = tDet > 1 ? `${this.units[tDet]}-mille` : "mille";
+      const convRest =
+        restSum > 0 ? `-${this.convertHundredAndMore(restSum)}` : "";
+      return `${convThousand}${convRest}`;
+    } else {
+      return "Not wort ith";
+    }
   }
 }
 

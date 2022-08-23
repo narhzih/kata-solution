@@ -19,4 +19,4 @@ function convertFromKataToFrench(digits) {
 }
 
 // Testing it
-console.log(convertFromKataToFrench([13, 90, 55, 1001]));
+console.log(convertFromKataToFrench([13, 99, 55, 1110]));
