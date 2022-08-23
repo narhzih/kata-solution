@@ -1,6 +1,6 @@
 {
   "name": "kata-solution-olawale",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Solution to kata to french converter",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
