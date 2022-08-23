@@ -41,6 +41,24 @@ class Converter {
       100000: "",
     };
   }
+  getNumberPlaceValue(num, res = [], factor = 1) {
+    if (num) {
+      const val = (num % 10) * factor;
+      res.unshift(val);
+      return this.getNumberPlaceValue(Math.floor(num / 10), res, factor * 10);
+    }
+    return res;
+  }
+
+  getArraySum(arr) {
+    console.log("Calculating sum for ->", arr);
+    let total = 0;
+    arr.forEach((num) => {
+      total += num;
+    });
+
+    return total;
+  }
   convertDigit(digit) {
     if (digit > 0 && digit <= 16) {
       return this.convertUnit(digit);
@@ -53,15 +71,6 @@ class Converter {
 
   convertUnit(digit) {
     return this.units[digit];
-  }
-
-  getNumberPlaceValue(num, res = [], factor = 1) {
-    if (num) {
-      const val = (num % 10) * factor;
-      res.unshift(val);
-      return this.getNumberPlaceValue(Math.floor(num / 10), res, factor * 10);
-    }
-    return res;
   }
 
   convertTens(digit) {
@@ -106,17 +115,34 @@ class Converter {
       return `${convHundered}${convTens}`;
     } else if (digit < 10000) {
       // Number in 10 thousands | only 4 place holders
-      console.log(placeValues);
       const thousand = placeValues[0];
       const restSum = placeValues[1] + placeValues[2] + placeValues[3];
-
       const tDet = thousand / 1000;
-      const convThousand = tDet > 1 ? `${this.units[tDet]}-mille` : "mille";
-      const convRest =
-        restSum > 0 ? `-${this.convertHundredAndMore(restSum)}` : "";
+      const convThousand =
+        tDet > 1 ? `${this.convertDigit(tDet)}-mille` : "mille";
+      const convRest = restSum > 0 ? `-${this.convertDigit(restSum)}` : "";
       return `${convThousand}${convRest}`;
+    } else if (digit < 100000) {
+      console.log("Place values");
+
+      const hThousand = placeValues[0];
+      const restSum = this.getArraySum(placeValues.slice(1));
+      console.log("REst sum ->", restSum);
+
+      const htDet = hThousand / 1000;
+      const convHt = this.convertDigit(htDet);
+      const convRest = restSum > 0 ? `-${this.convertDigit(restSum)}` : "";
+
+      return `${convHt}${convRest}`;
+    } else if (digit < 1000000) {
+      const highestValue = placeValues[0];
+      const restSum = this.getArraySum(placeValues.slice(1));
+      const hvDet = highestValue / 1000;
+      const convHt = this.convertDigit(hvDet);
+      const convRest = restSum > 0 ? `-${this.convertDigit(restSum)}` : "";
+      return `${convHt}${convRest}`;
     } else {
-      return "Not wort ith";
+      return "Can't convert this value";
     }
   }
 }
