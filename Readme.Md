@@ -7,7 +7,7 @@ This package lets you convert array of numbers between 1 and 999,999 to the equi
 Install the package with the following comand:
 
 ```bash
-$ npm i --save-dev kata-to-french-converter
+$ npm i --save-dev kata-to-french-converter@2.1.0
 ```
 
 In your script:

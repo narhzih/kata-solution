@@ -1,6 +1,6 @@
 {
   "name": "kata-to-french-converter",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Solution to kata to french converter",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
