@@ -60,6 +60,9 @@ class Converter {
                 if (isNaN(digit)) {
                     throw new Error(`All inputs must be a number :${digit} is not a NUMBER`);
                 }
+                if (digit >= 1000000) {
+                    throw new Error("Can't convert numbers greater than 999,999");
+                }
                 results.push(this.convertDigit(digit));
             });
         }

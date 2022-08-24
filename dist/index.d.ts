@@ -3,7 +3,7 @@ export declare class Converter {
     private tensPrefix;
     private getNumberPlaceValue;
     private getArraySum;
-    convertDigits(digits: Array<number>): Array<number>;
+    convertDigits(digits: Array<number>): Array<string>;
     private convertDigit;
     private convertUnit;
     private convertTens;
