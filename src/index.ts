@@ -52,15 +52,21 @@ export class Converter {
     return total;
   }
 
-  public convertDigits(digits) {
-    let results = [];
+  public convertDigits(digits: Array<number>): Array<number> {
+    let results: Array<number> = [];
     if (digits && digits.length) {
       digits.forEach((digit) => {
+        if (isNaN(digit)) {
+          throw new Error(
+            `All inputs must be a number :${digit} is not a NUMBER`
+          );
+        }
         results.push(this.convertDigit(digit));
       });
     }
     return results;
   }
+
   private convertDigit(digit) {
     if (digit > 0 && digit <= 16) {
       return this.convertUnit(digit);

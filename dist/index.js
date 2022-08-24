@@ -57,6 +57,9 @@ class Converter {
         let results = [];
         if (digits && digits.length) {
             digits.forEach((digit) => {
+                if (isNaN(digit)) {
+                    throw new Error(`All inputs must be a number :${digit} is not a NUMBER`);
+                }
                 results.push(this.convertDigit(digit));
             });
         }
