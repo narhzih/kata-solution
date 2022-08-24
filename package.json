@@ -1,6 +1,6 @@
 {
   "name": "kata-to-french-converter",
-  "version": "1.0.1",
+  "version": "2.1.0",
   "description": "Solution to kata to french converter",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -12,12 +12,14 @@
   "scripts": {
     "prepublish": "npm run build",
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --config ./jest.config.json"
   },
   "author": "Narhzih",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^28.1.8",
     "@types/node": "^18.7.11",
-    "jest": "^28.1.3"
+    "jest": "^28.1.3",
+    "ts-jest": "^28.0.8"
   }
 }
